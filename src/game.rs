@@ -61,7 +61,7 @@ impl Game {
             return;
         }
 
-        // self.update_snake(dir);
+        self.update_snake(dir);
     }
 
     pub fn draw(&self, ctx: &Context, g: &mut G2d) {
@@ -102,7 +102,7 @@ impl Game {
 
     fn check_eating(&mut self) {
         let (head_x, head_y): (i32, i32) = self.snake.head_position();
-        if self.food_exists && self.food_x == head_x && self.food_y == self.food_y == head_y {
+        if self.food_exists && self.food_x == head_x && self.food_y == head_y {
             self.food_exists = false;
             self.snake.restore_tail();
         }
@@ -120,10 +120,10 @@ impl Game {
 
     fn add_food(&mut self) {
         let mut rng = thread_rng();
-    
+
         let mut new_x = rng.gen_range(1..self.width - 1);
         let mut new_y = rng.gen_range(1..self.height - 1);
-    
+
         while self.snake.overlap_tail(new_x, new_y) {
             new_x = rng.gen_range(1..self.width - 1);
             new_y = rng.gen_range(1..self.height - 1);
